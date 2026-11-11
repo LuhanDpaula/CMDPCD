@@ -1,191 +1,278 @@
-# CMDPCD Jahu - Portal & Painel Administrativo
+# Documentação do PI - CMPCD Jaú
 
-Este é o portal institucional do **Conselho Municipal dos Direitos da Pessoa com Deficiência (CMDPCD) de Jahu**, desenvolvido em arquitetura MVC utilizando PHP puro, HTML5, CSS customizado e JavaScript. 
-
-O projeto conta com um portal público e um painel de administração completo para gerenciamento de conteúdos (notícias, composição de conselheiros, atas e resoluções), gerenciamento de usuários com controle de níveis de acesso e um formulário de cadastro estruturado para moderação de pessoas com deficiência.
+Esta documentação descreve o andamento do Projeto Integrador (PI) desenvolvido para o **CMPCD Jaú – Conselho Municipal dos Direitos da Pessoa com Deficiência de Jahu**, apresentando os objetivos, requisitos, regras de negócio e evolução do sistema institucional e de cadastro de pessoas com deficiência.
 
 ---
 
-## 🚀 Como Rodar o Projeto Localmente (XAMPP)
+# Sumário
 
-O sistema foi arquitetado para ser auto-configurável, facilitando a execução em qualquer máquina local que utilize o XAMPP.
+<details>
+<summary><strong>Expandir Sumário</strong></summary>
 
-### Passo 1: Copiar o Projeto
-Extraia a pasta do projeto no diretório raiz do seu servidor local:
-- No Windows (XAMPP): `C:\xampp\htdocs\CMDPCD_SITE`
+- [1. Introdução e Objetivos](#1-introdução-e-objetivos)
+  - [Objetivo Geral](#objetivo-geral)
+  - [Objetivos Específicos](#objetivos-específicos)
+- [2. Especificação de Requisitos](#2-especificação-de-requisitos)
+  - [2.1 Requisitos Funcionais](#21-requisitos-funcionais-rf)
+  - [2.2 Requisitos Não Funcionais](#22-requisitos-não-funcionais-rnf)
+- [3. Estudo de Viabilidade](#3-estudo-de-viabilidade)
+- [4. Modelo de Negócios Canvas](#4-modelo-de-negócios-canvas)
+- [5. Design do Sistema](#5-design-do-sistema)
+- [6. Protótipo](#6-protótipo)
+- [7. Aplicação](#7-aplicação)
 
-### Passo 2: Iniciar os Serviços no Painel do XAMPP
-Abra o painel de controle do XAMPP e inicie os seguintes módulos:
-1. **Apache**
-2. **MySQL**
-
-### Passo 3: Acessar no Navegador
-Abra seu navegador de preferência e acesse:
-- **[http://localhost/CMDPCD_SITE/](http://localhost/CMDPCD_SITE/)**
-
-> [!NOTE]  
-> **Auto-Configuração do Banco de Dados**: Ao acessar o site pela primeira vez, o próprio sistema PHP se conectará ao seu MySQL (`host: localhost`, `user: root` e senha vazia `""` ou `"root"`), criará o banco de dados `cmpcd_jau` automaticamente, executará a estrutura de tabelas em `database/CMDPCD_PI_BD.sql` e depois populará os dados iniciais através do seeder `database/seeder.sql`.
-
----
-
-## 💾 Gestão e Carga do Banco de Dados (CLI & Manual)
-
-Para desenvolvedores e administradores, o repositório foi separado em **Estrutura (Schema)** e **Dados Iniciais (Seeds)**.
-
-### Método 1: Linha de Comando (PHP CLI - Recomendado)
-Abra o terminal na pasta raiz do projeto (`C:\xampp\htdocs\CMDPCD_SITE`) e execute:
-
-* **Resetar banco do zero (Estrutura + Seeds)**:
-  ```bash
-  php database/reset_db.php
-  ```
-  *Este comando remove o banco `cmpcd_jau` se ele existir, recria-o vazio, aplica a estrutura (migrations) e insere todos os dados fictícios de demonstração (seeds).*
-
-* **Executar apenas Migrations (Cria estrutura vazia)**:
-  ```bash
-  php database/migrate.php
-  ```
-  *Carrega o arquivo `database/CMDPCD_PI_BD.sql`.*
-
-* **Executar apenas Seeds (Popula o banco)**:
-  ```bash
-  php database/seeder.php
-  ```
-  *Carrega o arquivo `database/seeder.sql`.*
-
-### Método 2: Importação Manual (via phpMyAdmin)
-Se preferir usar a interface gráfica do phpMyAdmin:
-1. Acesse o **phpMyAdmin** em `http://localhost/phpmyadmin/`
-2. Crie uma base de dados chamada `cmpcd_jau`
-3. Selecione a base criada e vá na aba **Importar**
-4. Escolha o arquivo da estrutura: **`database/CMDPCD_PI_BD.sql`** e clique em **Executar**
-5. (Opcional para dados de demonstração) Vá novamente em **Importar**, escolha o arquivo contendo os dados: **`database/seeder.sql`** e clique em **Executar**
+</details>
 
 ---
 
-## 🔑 Credenciais para Teste (Painel Administrativo)
+# 1. Introdução e Objetivos
 
-Para acessar o painel restrito e gerenciar o portal, acesse **[http://localhost/CMDPCD_SITE/admin](http://localhost/CMDPCD_SITE/admin)** ou clique em **Entrar** no menu e utilize os seguintes dados de login padrão:
+## Contextualização
 
-- **E-mail**: `admin@admin.com`
-- **Senha**: `admin`
+O **CMPCD Jaú (Conselho Municipal dos Direitos da Pessoa com Deficiência de Jahu)** é um órgão colegiado de caráter consultivo, deliberativo e fiscalizador, responsável por acompanhar, propor e fiscalizar políticas públicas voltadas às pessoas com deficiência no município.
 
-> [!WARNING]
-> Essa senha é só para demonstração. **Troque-a antes de publicar o site** e crie novos usuários com senha de no mínimo 8 caracteres.
+Com o crescimento da demanda por organização, transparência e centralização de informações, surgiu a necessidade de um sistema digital capaz de armazenar dados, facilitar o acesso às informações institucionais e auxiliar a Secretaria de Assistência e Desenvolvimento Social no planejamento de ações inclusivas.
 
----
-
-## 📁 Estrutura de Pastas do Projeto
-
-O portal segue a especificação MVC (Model-View-Controller) com rotas centralizadas no front controller:
-
-- `app/`
-  - `controllers/` - Lógica de controle e fluxo de requisições.
-  - `models/` - Conexão e transações com o banco de dados.
-  - `views/` - Telas do site público e do painel de administração em PHP/HTML.
-- `config/` - Arquivos de configuração de conexão de banco de dados e arquivos de cache.
-- `css/` - Estilização customizada em CSS vanilla do portal (`utilitarios.css` completa classes que faltavam no `style.css`).
-- `database/` - Contém o dump SQL (`CMDPCD_PI_BD.sql`) para importação da base de dados.
-- `js/` - Scripts front-end e interações reativas.
-- `public/` - Diretório público contendo o front controller `index.php`, uploads físicos e assets de mídia.
-- `routes/` - Mapeamento de rotas amigáveis da plataforma.
-- `index.php` - Redirecionamento da raiz da URL.
-- `.htaccess` - Configurações de reescrita de URL amigáveis (Apache).
+O projeto propõe o desenvolvimento de um **portal institucional integrado a um sistema de cadastro e gerenciamento de PCDs**, permitindo a geração de dados estatísticos e maior eficiência administrativa.
 
 ---
 
-## 🔒 Segurança
+## Objetivo Geral
 
-- **Documentos dos PCDs (RG, laudo, comprovante)** ficam em `storage/pcd_docs/`, fora da pasta pública. Só abrem pela rota `/admin/pcds/documento?id=`, que exige login de administrador.
-- **Pastas internas bloqueadas** (`app/`, `config/`, `database/`, `routes/`, `storage/`) via `.htaccess`. Em produção, o ideal é apontar o DocumentRoot do servidor direto para `/public`.
-- **SQL Injection:** todas as consultas usam *prepared statements* (PDO).
-- **XSS:** toda saída é escapada com `e()`; o conteúdo das notícias passa por `sanitize_html()` (remove scripts, eventos e links `javascript:`).
-- **CSRF:** todo formulário e toda ação de excluir/deferir/indeferir/sair exigem token (`csrf_field()` / `csrf_query()`).
-- **Login:** máximo de 5 tentativas erradas a cada 15 min por IP, novo ID de sessão ao entrar, cookie `HttpOnly` + `SameSite`, sessão expira após 30 min sem uso.
-- **Uploads:** tipo real do arquivo verificado (não só a extensão), nomes aleatórios, PHP desligado na pasta de uploads.
-- **LGPD:** o cadastro público não revela se um CPF já está na base; erros técnicos não aparecem para o visitante (vão para o log).
-- **Scripts de banco** (`database/*.php`) só rodam pelo terminal.
-- **Credenciais do banco:** copie `config/db.local.example.php` para `config/db.local.php` e use um usuário MySQL próprio (não o root) em produção.
-
-Funções de segurança: `app/helpers/security.php`.
-
-## ♿ Acessibilidade
-
-- **Botão flutuante** (canto inferior direito, atalho **Alt + A**) com o Símbolo Internacional de Acessibilidade Universal: aumentar/diminuir fonte, fonte padrão, alto contraste, destacar links, fonte legível, pausar animações e restaurar tudo. As preferências ficam salvas no navegador.
-- **Leitores de tela (NVDA, JAWS, VoiceOver, TalkBack):** link "Pular para o conteúdo", ícones decorativos ocultos, nomes acessíveis em botões só com ícone, labels ligados aos campos, campos obrigatórios anunciados, modais como `dialog` (Esc fecha, foco preso), avisos falados (`aria-live`), página atual marcada no menu e aviso de "abre em nova aba".
-- Respeita a configuração "reduzir movimento" do sistema operacional.
-
-Arquivos: `app/views/partials/a11y_widget.php`, `public/css/a11y.css`, `public/js/a11y.js`.
+Desenvolver um site institucional para o **CMPCD Jaú**, integrado à Secretaria de Assistência e Desenvolvimento Social, que possibilite o cadastro e gerenciamento de informações de pessoas com deficiência (PCDs), funcionando como um banco de dados confiável para o planejamento de serviços de inclusão social.
 
 ---
 
-## 🍃 MongoDB (Chat "Posso ajudar?" e Pedidos de Ajuda)
+## Objetivos Específicos
 
-O projeto usa **persistência poliglota**:
+1. Criar um portal informativo com a história do conselho, missão, valores, organograma e galeria de presidentes.
 
-| Banco | O que guarda | Por quê |
+2. Desenvolver um sistema de cadastro online para PCDs com upload obrigatório de documentos:
+   - RG;
+   - Comprovante de residência;
+   - Laudo médico.
+
+3. Implementar um espaço de transparência para divulgação de:
+   - atas;
+   - reuniões;
+   - resoluções;
+   - editais;
+   - documentos oficiais.
+
+4. Facilitar a importação de dados externos provenientes de fichas e planilhas de entidades parceiras como:
+   - AMAE;
+   - APAE;
+   - CISC.
+
+5. Garantir acessibilidade digital plena com:
+   - alto contraste;
+   - redimensionamento de fontes;
+   - suporte a leitores de tela.
+
+---
+
+# 2. Especificação de Requisitos
+
+## 2.1 Requisitos Funcionais (RF)
+
+Os requisitos funcionais representam as funcionalidades obrigatórias do sistema.
+
+| ID | Nome do Requisito | Descrição |
 |---|---|---|
-| **MySQL** | PCDs, usuários, notícias, membros, documentos | Dados muito relacionados, com regras fixas e transações |
-| **MongoDB** | Perguntas frequentes, pedidos de ajuda, dúvidas sem resposta, resumo mensal | Estrutura flexível, histórico dentro do documento, busca por texto e expiração automática (TTL) |
+| RF01 | História Institucional | O site deve exibir a história do conselho, sua origem, evolução e principais marcos institucionais. |
+| RF02 | Galeria de Presidentes | O sistema deve exibir fotos, nomes e períodos de mandato dos presidentes do conselho. |
+| RF03 | Membros do Conselho | O portal deve apresentar os membros ativos do conselho e suas respectivas funções. |
+| RF04 | Organograma Institucional | O site deve exibir a estrutura organizacional oficial do conselho. |
+| RF05 | Formulário de Contato | Disponibilizar formulário contendo nome, e-mail, telefone, assunto e mensagem, além dos contatos institucionais. |
+| RF06 | Integração com Redes Sociais | Integrar Instagram e Facebook, exibindo publicações recentes automaticamente. |
+| RF07 | Espaço de Transparência Pública | Disponibilizar área para visualização e download de atas, resoluções, editais e documentos oficiais. |
+| RF08 | Cadastro de PCD | Permitir cadastro completo de cidadãos com informações pessoais, socioeconômicas e de saúde, incluindo upload de documentos obrigatórios. |
+| RF09 | Gestão de Cadastros | Permitir localizar, editar e atualizar registros já existentes. |
+| RF10 | Painel Estatístico e de Índices | Exibir dashboards administrativos com gráficos, estatísticas e indicadores sobre a população PCD cadastrada. |
+| RF11 | Gestão de Níveis de Acesso | Controlar permissões por perfis: Assistente Social, CMPCD e Administrador/Editor. |
+| RF12 | Importação de Dados Externos | Permitir importação de dados via arquivos Excel (.xlsx/.csv) e fichas físicas digitalizadas. |
 
-Os dois bancos são independentes: nenhum dado pessoal dos PCDs vai para o MongoDB. Se o MongoDB estiver desligado, o site continua funcionando; só o chat e a aba de pedidos ficam indisponíveis.
+---
 
-### Passo 1: Instalar o MongoDB
-Escolha **uma** opção:
-- **Local:** instale o *MongoDB Community Server* (site oficial do MongoDB). Ele roda em `mongodb://127.0.0.1:27017`, que já é o padrão do projeto.
-- **Nuvem (MongoDB Atlas, gratuito):** crie um cluster, libere seu IP e copie a *connection string* para `mongo_uri` em `config/db.local.php` (use o modelo `config/db.local.example.php`). Bom para o grupo todo usar o mesmo banco.
+## 2.2 Requisitos Não Funcionais (RNF)
 
-### Passo 2: Ativar a extensão `mongodb` no PHP do XAMPP
-O projeto usa só a extensão nativa do PHP (**não precisa de Composer**).
-1. Descubra sua versão do PHP e se ela é *Thread Safe*: abra `http://localhost/dashboard/phpinfo.php` e veja **PHP Version**, **Architecture** (x64) e **Thread Safety** (no XAMPP normalmente é *enabled* = TS).
-2. Baixe o arquivo `php_mongodb.dll` compatível (mesma versão do PHP, **TS**, **x64**) na página de *releases* do driver oficial: github.com/mongodb/mongo-php-driver/releases.
-3. Copie o `php_mongodb.dll` para `C:\xampp\php\ext\`.
-4. Abra `C:\xampp\php\php.ini` e adicione a linha: `extension=mongodb`
-5. Reinicie o Apache no painel do XAMPP.
-6. Confira no terminal: `php -m` deve listar **mongodb**. Se a versão da DLL não bater com o PHP, o Apache mostra um aviso ao iniciar; baixe a versão correta.
+Os requisitos não funcionais definem características técnicas e de qualidade do sistema.
 
-### Passo 3: Criar índices e carregar as perguntas
-Na pasta do projeto:
-```bash
-php database/mongo_setup.php
-```
-Mostra cada índice criado (`OK`) e quantos documentos existem em cada coleção. Isso também acontece automaticamente no primeiro acesso ao chat.
-Para apagar e recarregar as 30 perguntas iniciais: `php database/mongo_setup.php --resetar-faq`
+---
 
-Alternativa pelo terminal do MongoDB:
-```bash
-mongoimport --db cmpcd_jau --collection faq --jsonArray --file database/mongo/faq_seed.json
-```
+### 2.2.1 Segurança e Privacidade
 
-### Coleções
-
-| Coleção | Conteúdo | Recursos do MongoDB usados |
+| ID | Requisito | Descrição |
 |---|---|---|
-| `faq` | Perguntas e respostas do chat | CRUD, **índice de texto em português** (`$text`, com pesos), `$inc` (visualizações e "ajudou?") |
-| `pedidos_ajuda` | Pedidos "Quero ajuda do Conselho" | Array `historico` com `$push`, `$set`/`$unset` no status, **índice TTL** (apaga 1 ano após o encerramento), índice composto da fila, índice único do protocolo |
-| `perguntas_sem_resposta` | O que foi digitado e o chat não achou | **TTL de 90 dias**, aggregation `$group` para mostrar as mais repetidas |
-| `resumo_mensal_pedidos` | Números por mês, sem dados pessoais | Aggregation com **`$merge`**: o histórico fica mesmo depois que os pedidos são apagados |
-| `contadores` | Sequência do número de protocolo | `findAndModify` + `$inc` (atômico: dois pedidos nunca recebem o mesmo número) |
-| `logs_auditoria` | Trilha de auditoria e ações dos usuários | **Índice TTL de 2 anos**, append-only de alto throughput, rastreabilidade LGPD (acesso a laudos) e **fallback automático para MySQL** quando sem MongoDB |
+| RNF01 | LGPD e Privacidade | Dados individuais dos PCDs devem ser protegidos e acessíveis apenas por usuários autenticados. |
+| RNF02 | Integridade dos Dados | O sistema deve validar campos obrigatórios para garantir precisão estatística. |
 
-### Regras de acesso
-- **Perguntas Frequentes** (Painel > Conteúdos): `admin_total` e `editor`.
-- **Pedidos de Ajuda** (aba própria no painel): somente `admin_total`, pois contêm dados pessoais.
-- **Auditoria / Logs** (Painel > Auditoria): somente `admin_total`, controle de conformidade e segurança.
+---
 
-### LGPD no chat e na Auditoria
-- A pessoa precisa marcar o consentimento, e o texto aceito fica gravado no pedido.
-- O pedido é **apagado automaticamente 1 ano após ser encerrado** (status *Concluído* ou *Sem retorno*), via índice TTL no campo `encerrado_em`. Pedidos em aberto não expiram, e se um pedido for reaberto a contagem é cancelada (`$unset`).
-- O botão "Excluir dados agora" atende quando a pessoa pede a exclusão antes do prazo.
-- As dúvidas sem resposta não guardam nenhum dado pessoal e expiram em 90 dias.
-- **Auditoria de Dados Médicos (LGPD Art. 6º)**: Toda visualização de documento ou laudo médico sensível de PCD é gravada com IP, data/hora e identificação do administrador responsável.
+### 2.2.2 Usabilidade e Acessibilidade
 
-### Arquivos
-- Conexão: `config/Mongo.php`
-- Models: `app/models/Faq.php`, `PedidoAjuda.php`, `PerguntaSemResposta.php`, `AuditLog.php`
-- Controllers: `app/controllers/ChatController.php` (público), `FaqController.php`, `PedidoController.php`, `LogController.php` (painel)
-- Chat: `app/views/partials/chat_widget.php`, `public/js/chat.js`, `public/css/chat.css`
-- Auditoria: `app/views/admin/logs/index.php`
-- Perguntas iniciais: `database/mongo/faq_seed.json`
+| ID | Requisito | Descrição |
+|---|---|---|
+| RNF03 | Acessibilidade | O sistema deve seguir diretrizes WCAG, com suporte a leitores de tela, alto contraste e redimensionamento de fontes. |
+| RNF04 | Responsividade | A interface deve adaptar-se automaticamente a desktop, tablets e smartphones. |
 
-> **Observação:** quando o servidor não suporta algum operador de aggregation (por exemplo, bancos apenas *compatíveis* com MongoDB), o sistema faz o mesmo cálculo em PHP automaticamente. Com o MongoDB oficial, os recursos nativos são usados. Caso o MongoDB não esteja instalado no ambiente (ex: computadores de laboratório acadêmico), o sistema ativa o modo de contingência no MySQL de forma 100% transparente.
+---
+
+### 2.2.3 Desempenho e Tecnologia
+
+| ID | Requisito | Descrição |
+|---|---|---|
+| RNF05 | Desempenho | O carregamento das páginas deve ocorrer em até 3 segundos em conexões estáveis. |
+| RNF06 | Stack Tecnológica | O sistema será desenvolvido com HTML5, CSS3 (Bootstrap), JavaScript e MySQL. |
+| RNF07 | Interoperabilidade | O sistema deve permitir exportação de relatórios em Excel, CSV e PDF. |
+
+---
+
+# 3. Estudo de Viabilidade
+
+## Viabilidade Técnica
+
+O projeto utiliza tecnologias web amplamente consolidadas, como:
+- HTML5;
+- CSS3;
+- Bootstrap;
+- JavaScript;
+- MySQL.
+
+Essas ferramentas possuem ampla documentação, baixo custo de implementação e facilidade de manutenção.
+
+---
+
+## Viabilidade Financeira
+
+O sistema poderá ser hospedado em infraestrutura municipal ou em serviços de hospedagem de baixo custo, reduzindo despesas operacionais.
+
+---
+
+## Viabilidade Operacional
+
+A interface será desenvolvida com foco em simplicidade e usabilidade, permitindo que os responsáveis da Secretaria de Assistência Social utilizem o sistema sem necessidade de conhecimento técnico avançado.
+
+---
+
+# 4. Modelo de Negócios Canvas
+
+## Proposta de Valor
+
+Centralizar informações e o censo PCD do município em uma plataforma digital segura, acessível e transparente.
+
+---
+
+## Segmentos de Usuários
+
+- Conselheiros do CMPCD;
+- Pessoas com deficiência;
+- Secretaria de Assistência Social;
+- Gestão Pública Municipal.
+
+---
+
+## Parceiros-Chave
+
+- Prefeitura Municipal de Jahu;
+- Secretaria de Assistência e Desenvolvimento Social;
+- AMAE;
+- APAE;
+- CISC.
+
+---
+
+## Benefícios Esperados
+
+- Maior organização dos dados;
+- Transparência pública;
+- Facilidade de gestão;
+- Apoio ao planejamento de políticas públicas;
+- Inclusão digital e acessibilidade.
+
+---
+
+# 5. Design do Sistema
+
+## Paleta de Cores
+
+| Cor | Código |
+|---|---|
+| Azul Primário | #2D9CDB |
+| Azul Suave | #56CCF2 |
+| Bege Claro | #F9F7F1 |
+| Cinza Suave | #E0E0E0 |
+| Preto Suave | #333333 |
+
+---
+
+## Tipografia
+
+- Fonte principal: **Nunito**
+- Fontes alternativas:
+  - Arial;
+  - Helvetica;
+  - sans-serif.
+
+---
+
+## Diretrizes Visuais
+
+- Interface limpa e acessível;
+- Navegação simplificada;
+- Alto contraste;
+- Layout responsivo;
+- Foco em acessibilidade digital.
+
+---
+
+# 6. Protótipo
+
+O protótipo visual do sistema foi desenvolvido no **Figma**, permitindo a validação prévia da interface e experiência do usuário antes da implementação.
+
+- Estruturação das telas institucionais;
+- Simulação do cadastro de PCDs;
+- Definição da identidade visual;
+- Protótipo responsivo.
+
+---
+
+# 7. Aplicação
+
+Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação do banco de dados, construção das interfaces e implementação das funcionalidades administrativas.
+
+## Tecnologias Utilizadas
+
+- HTML5;
+- CSS3;
+- Bootstrap;
+- JavaScript;
+- MySQL;
+- Git/GitHub.
+
+---
+
+## Funcionalidades em Desenvolvimento
+
+- Sistema de autenticação;
+- Painel administrativo;
+- Dashboard estatístico;
+- Upload de documentos;
+- Integração com banco de dados;
+- Importação de planilhas;
+- Área de transparência pública.
+
+---
+
+
+# Equipe do Projeto
+
+- Lucas Antonio Ribeiro
+- Luhan de Paula Ribeiro
+- Samuel Custódio dos Santos
+
+---
+
+# Instituição
+
+Projeto Integrador desenvolvido na Fatec-Jahu – 2026**.
