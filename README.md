@@ -255,12 +255,7 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 ## Funcionalidades em Desenvolvimento
 
 - Sistema de autenticação;
-- Painel administrativo;
-- Dashboard estatístico;
-- Upload de documentos;
-- Integração com banco de dados;
 - Importação de planilhas;
-- Área de transparência pública.
 
 ---
 
