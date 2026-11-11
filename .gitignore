@@ -1,0 +1,24 @@
+# Configurações de banco e ambiente locais
+config/db.local.php
+.env
+.env.local
+
+# Documentos e laudos médicos privados de PCDs (LGPD)
+# NUNCA devem ser versionados em repositório de código público ou privado
+storage/pcd_docs/*
+!storage/pcd_docs/.gitkeep
+
+# Diretório de controle de rate limit
+storage/ratelimit/*
+!storage/ratelimit/.gitkeep
+
+# Logs e arquivos temporários
+storage/logs/*
+!storage/logs/.gitkeep
+*.log
+
+# Arquivos de IDEs e sistemas operacionais
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

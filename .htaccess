@@ -1,0 +1,25 @@
+# ============================================================
+#  SEGURANÇA - raiz do projeto
+#  Somente a pasta /public deve ser acessível pela web.
+#  (O ideal em produção é apontar o DocumentRoot direto para /public.)
+# ============================================================
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloqueia acesso direto a pastas internas (código, banco, configurações, documentos dos PCDs)
+    RewriteRule ^(app|config|database|routes|storage|\.vscode|\.git)(/|$) - [F,L]
+
+    # Bloqueia arquivos sensíveis em qualquer lugar (sql, logs, backups, markdown, env, json de config)
+    RewriteRule \.(sql|log|bak|old|swp|md|env|ini|sh|json|lock|dist)$ - [F,L,NC]
+    RewriteRule (^|/)\. - [F,L]
+
+    # Raiz -> public
+    RewriteRule ^$ public/ [L]
+
+    # Tudo que não começar com public/ é enviado para dentro de public/
+    RewriteCond %{REQUEST_URI} !/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

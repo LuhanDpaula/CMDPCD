@@ -1,0 +1,17 @@
+<?php
+/**
+ * ============================================================
+ *  CONFIGURAÇÃO LOCAL / PRODUÇÃO DE BANCO DE DADOS
+ * ============================================================
+ *  Copie este arquivo para "config/db.local.php" e configure
+ *  com as credenciais seguras do seu servidor MySQL.
+ *  O arquivo db.local.php é ignorado pelo Git (.gitignore).
+ * ============================================================
+ */
+
+return [
+    'host'   => 'localhost',
+    'dbname' => 'cmpcd_jau',
+    'user'   => 'cmdpcd_user',
+    'pass'   => 'coloque_uma_senha_forte_aqui',
+];

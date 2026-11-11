@@ -1,0 +1,212 @@
+/* ============================================================
+   ACESSIBILIDADE - CMDPCD Jahu
+   Widget flutuante + recursos para leitores de tela
+   ============================================================ */
+
+/* Texto visível apenas para leitores de tela */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Link "Pular para o conteúdo" - aparece ao navegar com TAB */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 10000;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+  padding: .75rem 1.25rem;
+  border-radius: .75rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: top .15s;
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Foco sempre visível para quem navega pelo teclado */
+:focus-visible {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+/* ---------- Botão flutuante ---------- */
+.a11y-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 9998;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  background: #1e6fb8;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px -4px rgb(0 0 0 / .35);
+  transition: transform .15s, background .15s;
+}
+.a11y-fab:hover { transform: scale(1.07); background: #175a96; }
+.a11y-fab svg { width: 2rem; height: 2rem; display: block; }
+
+/* ---------- Painel ---------- */
+.a11y-panel {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 10rem;                /* acima dos botões de acessibilidade e do chat */
+  z-index: 9999;
+  width: 17rem;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 11.5rem);
+  overflow-y: auto;
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px -8px rgb(0 0 0 / .3);
+  padding: 1rem .75rem .75rem;
+}
+.a11y-panel[hidden] { display: none; }
+
+.a11y-panel h2 {
+  font-size: .95rem;
+  font-weight: 800;
+  margin: 0 0 .5rem .5rem;
+}
+
+.a11y-panel ul { list-style: none; margin: 0; padding: 0; }
+
+.a11y-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem .5rem;
+  border: 0;
+  border-radius: .6rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+.a11y-option:hover { background: hsl(var(--muted) / .6); }
+.a11y-option svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+.a11y-option[aria-pressed="true"] {
+  background: hsl(var(--primary) / .15);
+  font-weight: 800;
+}
+.a11y-option[aria-pressed="true"]::after {
+  content: "✓";
+  margin-left: auto;
+  font-weight: 900;
+}
+
+.a11y-sep { height: 1px; background: hsl(var(--border)); margin: .4rem .25rem; }
+
+.a11y-close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.a11y-close:hover { background: hsl(var(--muted) / .6); }
+
+/* ---------- Modos ativados ---------- */
+
+/* Alto contraste: complementa as variáveis já existentes em .high-contrast */
+html.high-contrast body { background: #000 !important; color: #fff !important; }
+html.high-contrast a { text-decoration: underline !important; }
+/* Links comuns sobre fundo preto: amarelo */
+html.high-contrast a:not([class*="bg-"]) { color: #ffff00 !important; }
+/* Links/botões sobre fundo amarelo (botões primários, faixa do topo e rodapé): preto */
+html.high-contrast a.bg-primary,
+html.high-contrast button.bg-primary,
+html.high-contrast [style*="hero-gradient"] a,
+html.high-contrast [style*="hero-gradient"] a:not([class*="bg-"]) { color: #000 !important; }
+html.high-contrast a[class*="bg-primary-foreground"] { color: #000 !important; border: 2px solid #000 !important; }
+html.high-contrast img { filter: grayscale(100%) contrast(1.2); }
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast textarea {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+html.high-contrast ::placeholder { color: #ccc !important; }
+html.high-contrast .a11y-fab { background: #ffff00; color: #000; border-color: #000; }
+html.high-contrast .a11y-panel { background: #000; color: #fff; border: 2px solid #ffff00; }
+
+/* Destacar links */
+html.a11y-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  outline: 2px dashed currentColor;
+  outline-offset: 2px;
+}
+
+/* Fonte mais legível (boa para dislexia e baixa visão) */
+html.a11y-legivel body,
+html.a11y-legivel body * {
+  font-family: Verdana, Tahoma, Arial, sans-serif !important;
+  letter-spacing: .03em;
+  word-spacing: .1em;
+  line-height: 1.7 !important;
+}
+
+/* Pausar animações (sensibilidade a movimento, TDAH, epilepsia fotossensível) */
+html.a11y-sem-animacao *,
+html.a11y-sem-animacao *::before,
+html.a11y-sem-animacao *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html.a11y-sem-animacao .fade-in-up,
+html.a11y-sem-animacao .fade-in-left,
+html.a11y-sem-animacao .fade-in-right,
+html.a11y-sem-animacao .zoom-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Respeita a preferência do sistema operacional */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .a11y-fab, .a11y-panel, .skip-link { display: none !important; }
+}
+
+/* Botão com fundo sólido escuro no alto contraste: texto amarelo */
+html.high-contrast a.bg-primary-foreground,
+html.high-contrast [style*="hero-gradient"] a.bg-primary-foreground { color: #ffff00 !important; border-color: #ffff00 !important; }

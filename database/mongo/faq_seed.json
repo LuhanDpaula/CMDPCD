@@ -1,0 +1,430 @@
+[
+  {
+    "categoria": "conselho",
+    "pergunta": "O que é o CMPCD?",
+    "resposta": "É o Conselho Municipal da Pessoa com Deficiência de Jahu, criado pela Lei Municipal nº 3.751/2003. Ele acompanha, fiscaliza e propõe políticas públicas para garantir os direitos das pessoas com deficiência na cidade.",
+    "palavras_chave": [
+      "conselho",
+      "cmpcd",
+      "cmdpcd",
+      "o que é",
+      "função",
+      "para que serve"
+    ],
+    "ordem": 1
+  },
+  {
+    "categoria": "conselho",
+    "pergunta": "O Conselho dá benefícios, dinheiro ou cestas básicas?",
+    "resposta": "Não. O Conselho não concede benefícios diretamente. Ele orienta, encaminha você ao serviço certo (INSS, CRAS, Saúde, Educação) e cobra do poder público quando um direito não é respeitado.",
+    "palavras_chave": [
+      "benefício",
+      "dinheiro",
+      "cesta básica",
+      "auxílio",
+      "ajuda financeira",
+      "doação"
+    ],
+    "ordem": 2
+  },
+  {
+    "categoria": "conselho",
+    "pergunta": "Quem faz parte do Conselho?",
+    "resposta": "São 16 membros titulares e seus suplentes. Metade representa o poder público e metade a sociedade civil, como entidades e pessoas com deficiência. Os conselheiros não recebem salário: o trabalho é considerado serviço público relevante.",
+    "palavras_chave": [
+      "membros",
+      "conselheiros",
+      "composição",
+      "quem participa",
+      "presidente"
+    ],
+    "ordem": 3
+  },
+  {
+    "categoria": "conselho",
+    "pergunta": "Quando acontecem as reuniões? Posso participar?",
+    "resposta": "As reuniões ordinárias acontecem toda 4ª quarta-feira do mês, às 9h. O local muda e é divulgado com 15 dias de antecedência no Jornal Oficial do Município. Para saber como participar, entre em contato com o Conselho pelo telefone (14) 3624-5077.",
+    "palavras_chave": [
+      "reunião",
+      "reuniões",
+      "participar",
+      "assistir",
+      "quando",
+      "horário",
+      "pauta"
+    ],
+    "ordem": 4
+  },
+  {
+    "categoria": "conselho",
+    "pergunta": "Como uma entidade ou pessoa pode fazer parte do Conselho?",
+    "resposta": "Os representantes da sociedade civil são escolhidos conforme a lei municipal e os editais publicados no Jornal Oficial do Município. Entre em contato com o Conselho para saber quando será a próxima escolha.",
+    "palavras_chave": [
+      "ser conselheiro",
+      "fazer parte",
+      "entidade",
+      "eleição",
+      "edital",
+      "candidatura"
+    ],
+    "ordem": 5
+  },
+  {
+    "categoria": "conselho",
+    "pergunta": "Onde fica o Conselho e qual o horário de atendimento?",
+    "resposta": "Rua Aristides Lobo Sobrinho, nº 174, Chácara Braz Miraglia, Jahu/SP.\nTelefone: (14) 3624-5077\nE-mail: cmpcdjau@gmail.com\nAtendimento de segunda a sexta, das 8h às 17h.",
+    "palavras_chave": [
+      "endereço",
+      "onde fica",
+      "telefone",
+      "e-mail",
+      "email",
+      "horário",
+      "atendimento",
+      "contato",
+      "localização"
+    ],
+    "ordem": 6
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Para que serve o cadastro de pessoa com deficiência?",
+    "resposta": "Ele ajuda o Conselho e a Prefeitura a saber quantas pessoas com deficiência vivem em Jahu e do que elas precisam, para planejar políticas públicas. O cadastro não é uma carteirinha e não garante benefício automaticamente.",
+    "palavras_chave": [
+      "cadastro",
+      "registro",
+      "para que serve",
+      "carteirinha",
+      "pcd"
+    ],
+    "ordem": 7
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Como faço meu cadastro?",
+    "resposta": "Clique em \"Registrar PCD\" no menu do site e preencha as etapas: dados pessoais, endereço, informações sobre a deficiência, situação socioeconômica e documentos.",
+    "palavras_chave": [
+      "como cadastrar",
+      "fazer cadastro",
+      "registrar",
+      "inscrição",
+      "me cadastrar"
+    ],
+    "ordem": 8
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Quais documentos preciso enviar no cadastro?",
+    "resposta": "Documento com foto (RG ou CNH), comprovante de residência e laudo médico, de preferência com o CID. Os arquivos podem ser PDF, JPG ou PNG, com até 5 MB cada.",
+    "palavras_chave": [
+      "documentos",
+      "laudo",
+      "rg",
+      "cnh",
+      "comprovante de residência",
+      "cid",
+      "anexo",
+      "arquivo"
+    ],
+    "ordem": 9
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Posso fazer o cadastro de outra pessoa, como meu filho?",
+    "resposta": "Sim. No formulário, marque a opção de responsável legal e preencha também os seus dados e o seu grau de parentesco.",
+    "palavras_chave": [
+      "filho",
+      "filha",
+      "responsável",
+      "curador",
+      "tutor",
+      "outra pessoa",
+      "dependente"
+    ],
+    "ordem": 10
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Não tenho e-mail. Consigo me cadastrar?",
+    "resposta": "Sim. O e-mail é opcional; basta informar um telefone para contato.",
+    "palavras_chave": [
+      "sem email",
+      "não tenho email",
+      "e-mail obrigatório"
+    ],
+    "ordem": 11
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Não consigo fazer o cadastro pela internet. O que faço?",
+    "resposta": "Ligue para (14) 3624-5077 ou vá até o Conselho no horário de atendimento (segunda a sexta, das 8h às 17h), que a equipe ajuda você.",
+    "palavras_chave": [
+      "não consigo",
+      "dificuldade",
+      "presencial",
+      "ajuda para cadastrar",
+      "sem internet"
+    ],
+    "ordem": 12
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Enviei meu cadastro. E agora?",
+    "resposta": "Ele fica em análise até a equipe conferir os documentos e aprovar. Se faltar alguma informação, o Conselho pode entrar em contato pelo telefone informado.",
+    "palavras_chave": [
+      "enviei",
+      "análise",
+      "aprovado",
+      "status",
+      "demora",
+      "prazo",
+      "resposta do cadastro"
+    ],
+    "ordem": 13
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Apareceu uma mensagem dizendo que não foi possível concluir o cadastro. Por quê?",
+    "resposta": "Normalmente isso acontece quando já existe um cadastro com esses dados. Entre em contato com o Conselho para verificar.",
+    "palavras_chave": [
+      "erro",
+      "não foi possível",
+      "cadastro duplicado",
+      "já cadastrado",
+      "mensagem de erro"
+    ],
+    "ordem": 14
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Mudei de endereço ou telefone. Como atualizo meu cadastro?",
+    "resposta": "Entre em contato com o Conselho por telefone, e-mail ou pessoalmente, informando os dados novos.",
+    "palavras_chave": [
+      "atualizar",
+      "alterar dados",
+      "mudei",
+      "novo endereço",
+      "novo telefone",
+      "corrigir"
+    ],
+    "ordem": 15
+  },
+  {
+    "categoria": "cadastro",
+    "pergunta": "Meus dados ficam seguros?",
+    "resposta": "Sim. Os dados seguem a Lei Geral de Proteção de Dados (LGPD). Só pessoas autorizadas do Conselho têm acesso, e os documentos não ficam disponíveis publicamente na internet.",
+    "palavras_chave": [
+      "segurança",
+      "lgpd",
+      "privacidade",
+      "dados pessoais",
+      "sigilo",
+      "proteção"
+    ],
+    "ordem": 16
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "O que é o BPC/LOAS e como pedir?",
+    "resposta": "É um benefício de um salário mínimo por mês para pessoas com deficiência de baixa renda. Pela regra geral, a renda da família deve ser de até 1/4 do salário mínimo por pessoa.\nÉ preciso estar inscrito no CadÚnico (feito no CRAS) e pedir pelo aplicativo Meu INSS ou pelo telefone 135. O INSS faz avaliação médica e social.",
+    "palavras_chave": [
+      "bpc",
+      "loas",
+      "benefício",
+      "inss",
+      "salário mínimo",
+      "cadúnico",
+      "aposentadoria"
+    ],
+    "ordem": 17
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "Tenho direito a atendimento prioritário?",
+    "resposta": "Sim. Pessoas com deficiência têm atendimento prioritário em órgãos públicos, bancos, comércio e serviços, conforme a Lei nº 10.048/2000 e a Lei Brasileira de Inclusão (Lei nº 13.146/2015).",
+    "palavras_chave": [
+      "prioridade",
+      "fila",
+      "atendimento preferencial",
+      "prioritário"
+    ],
+    "ordem": 18
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "Como consigo a credencial de estacionamento em vaga especial?",
+    "resposta": "Por lei, 2% das vagas de estacionamentos devem ser reservadas para pessoas com deficiência. A credencial é emitida pelo órgão de trânsito do município. Confirme com o Conselho o local e os documentos exigidos em Jahu.",
+    "palavras_chave": [
+      "estacionamento",
+      "vaga",
+      "credencial",
+      "cartão",
+      "carro",
+      "vaga especial"
+    ],
+    "ordem": 19
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "Empresas são obrigadas a contratar pessoas com deficiência?",
+    "resposta": "Sim. Pela Lei nº 8.213/1991, empresas com 100 ou mais funcionários devem reservar de 2% a 5% das vagas para pessoas com deficiência ou reabilitadas, conforme o tamanho da empresa.",
+    "palavras_chave": [
+      "emprego",
+      "trabalho",
+      "cota",
+      "vaga de emprego",
+      "empresa",
+      "contratação"
+    ],
+    "ordem": 20
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "O que é o Passe Livre?",
+    "resposta": "O Passe Livre Interestadual garante viagens gratuitas de ônibus, trem ou barco entre estados para pessoas com deficiência com renda familiar de até um salário mínimo por pessoa. O pedido é feito junto ao Governo Federal. Para transporte dentro da cidade, consulte o Conselho sobre as regras municipais.",
+    "palavras_chave": [
+      "passe livre",
+      "ônibus",
+      "transporte",
+      "viagem",
+      "gratuidade",
+      "passagem"
+    ],
+    "ordem": 21
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "Tenho isenção de impostos na compra de carro?",
+    "resposta": "Pessoas com deficiência podem ter isenção de IPI e IOF na compra de veículo, conforme as regras da Receita Federal. As isenções de ICMS e IPVA dependem das regras do Estado de São Paulo, que mudaram nos últimos anos. Consulte a Receita Federal e a Secretaria da Fazenda de SP antes da compra.",
+    "palavras_chave": [
+      "isenção",
+      "ipi",
+      "ipva",
+      "icms",
+      "iof",
+      "carro",
+      "veículo",
+      "imposto"
+    ],
+    "ordem": 22
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "O que é a CIPTEA?",
+    "resposta": "É a Carteira de Identificação da Pessoa com Transtorno do Espectro Autista, criada pela Lei nº 13.977/2020 (Lei Romeo Mion). Ela facilita o atendimento prioritário. Confirme com o Conselho onde emitir em Jahu.",
+    "palavras_chave": [
+      "ciptea",
+      "autismo",
+      "tea",
+      "autista",
+      "carteira",
+      "romeo mion",
+      "carteirinha",
+      "identificação"
+    ],
+    "ordem": 23
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "Pessoa com deficiência paga meia-entrada?",
+    "resposta": "Sim. A Lei nº 12.933/2013 garante meia-entrada em eventos culturais e esportivos para a pessoa com deficiência e também para o acompanhante, quando ele for necessário.",
+    "palavras_chave": [
+      "meia-entrada",
+      "meia entrada",
+      "cinema",
+      "show",
+      "ingresso",
+      "acompanhante"
+    ],
+    "ordem": 24
+  },
+  {
+    "categoria": "direitos",
+    "pergunta": "A escola pode recusar a matrícula ou cobrar a mais do meu filho com deficiência?",
+    "resposta": "Não. A Lei Brasileira de Inclusão proíbe recusar a matrícula e proíbe escolas particulares de cobrar qualquer valor extra pelo atendimento à criança com deficiência. Se isso acontecer, procure o Conselho.",
+    "palavras_chave": [
+      "escola",
+      "matrícula",
+      "educação",
+      "cobrança",
+      "mensalidade",
+      "professor de apoio",
+      "inclusão escolar"
+    ],
+    "ordem": 25
+  },
+  {
+    "categoria": "denuncias",
+    "pergunta": "Como denunciar discriminação ou violência contra pessoa com deficiência?",
+    "resposta": "Ligue para o Disque 100 (Direitos Humanos), que é gratuito e funciona 24 horas. Em caso de emergência, ligue 190. Você também pode informar o Conselho, que acompanha e encaminha o caso.",
+    "palavras_chave": [
+      "denúncia",
+      "denunciar",
+      "violência",
+      "discriminação",
+      "maus-tratos",
+      "abuso",
+      "preconceito",
+      "disque 100"
+    ],
+    "ordem": 26
+  },
+  {
+    "categoria": "denuncias",
+    "pergunta": "Encontrei uma calçada, um prédio ou um transporte sem acessibilidade. O que faço?",
+    "resposta": "Avise o Conselho pelo formulário de contato ou aqui no chat, informando o endereço e, se possível, uma foto. O Conselho fiscaliza e cobra providências do órgão responsável.",
+    "palavras_chave": [
+      "calçada",
+      "rampa",
+      "acessibilidade",
+      "prédio",
+      "buraco",
+      "sem acesso",
+      "reclamação"
+    ],
+    "ordem": 27
+  },
+  {
+    "categoria": "denuncias",
+    "pergunta": "Como peço para o Conselho entrar em contato comigo?",
+    "resposta": "Aqui no chat, escolha \"Quero ajuda do Conselho\" e preencha nome, telefone, bairro e o assunto. O contato não é imediato: a equipe atende os pedidos conforme a demanda. Seus dados são excluídos 1 ano após o encerramento do atendimento.",
+    "palavras_chave": [
+      "contato",
+      "me ligar",
+      "ligação",
+      "pedido de ajuda",
+      "falar com alguém",
+      "atendimento"
+    ],
+    "ordem": 28
+  },
+  {
+    "categoria": "site",
+    "pergunta": "Como uso os recursos de acessibilidade do site?",
+    "resposta": "Clique no botão redondo no canto inferior direito, ou aperte Alt + A. Lá você pode aumentar a fonte, ativar o alto contraste, destacar os links, usar uma fonte mais legível e pausar as animações. O site também funciona com leitores de tela.",
+    "palavras_chave": [
+      "acessibilidade",
+      "fonte",
+      "letra maior",
+      "contraste",
+      "leitor de tela",
+      "zoom"
+    ],
+    "ordem": 29
+  },
+  {
+    "categoria": "site",
+    "pergunta": "Onde encontro atas, resoluções e documentos do Conselho?",
+    "resposta": "Na página \"Transparência\", no menu do site, onde ficam as atas das reuniões, resoluções, o regimento interno e os relatórios de atividades.",
+    "palavras_chave": [
+      "ata",
+      "atas",
+      "resolução",
+      "documentos",
+      "transparência",
+      "regimento",
+      "relatório"
+    ],
+    "ordem": 30
+  }
+]

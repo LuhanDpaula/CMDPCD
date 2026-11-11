@@ -1,0 +1,45 @@
+# ============================================================
+#  Pasta de uploads PÚBLICOS (fotos, notícias, atas)
+#  Nada aqui pode ser executado como código.
+# ============================================================
+Options -Indexes -ExecCGI
+
+# Desliga o PHP nesta pasta (se alguém conseguir subir um .php, ele não roda)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pl .py .cgi .sh
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar
+
+# Só libera tipos de mídia/documento esperados
+<FilesMatch "\.(?i:php\d?|phtml|phar|pl|py|cgi|sh|htaccess|html?|svg|js)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Documentos pessoais de PCD nunca são servidos daqui
+<FilesMatch "^pcd_doc_">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Content-Security-Policy "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox"
+</IfModule>

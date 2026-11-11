@@ -1,0 +1,38 @@
+[
+  {
+    "id": "post_1",
+    "imagem": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=400&fit=crop",
+    "data": "02 Jun 2026",
+    "texto": "Reunião Ordinária do CMPCD Jahu: Discussão sobre as diretrizes de acessibilidade urbana e fiscalização de obras públicas no centro municipal. Agradecemos a presença de todos os conselheiros e cidadãos! ♿📋 #CMPCD #Jahu #Acessibilidade",
+    "likes": 48,
+    "comentarios": 6,
+    "link": "https://www.instagram.com/cmpcd_jau/"
+  },
+  {
+    "id": "post_2",
+    "imagem": "https://images.unsplash.com/photo-1596720426673-e4dcd4290f15?w=400&h=400&fit=crop",
+    "data": "28 Mai 2026",
+    "texto": "Campanha Permanente: Vaga Especial não é privilégio, é direito! Respeite as vagas de estacionamento destinadas às pessoas com deficiência e idosos. A conscientização começa por você. ♿🚗 #Acessibilidade #Respeito #Jaú",
+    "likes": 75,
+    "comentarios": 12,
+    "link": "https://www.instagram.com/cmpcd_jau/"
+  },
+  {
+    "id": "post_3",
+    "imagem": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=400&fit=crop",
+    "data": "21 Mai 2026",
+    "texto": "Hoje é o Dia Nacional de Luta da Pessoa com Deficiência. Uma data para reforçar nosso compromisso diário por mais acessibilidade, oportunidades no mercado de trabalho e inclusão em todos os setores da sociedade. Juntos somos mais fortes! ♿💪 #DiaDeLuta #InclusãoSocial #CMPCDJahu",
+    "likes": 92,
+    "comentarios": 18,
+    "link": "https://www.instagram.com/cmpcd_jau/"
+  },
+  {
+    "id": "post_4",
+    "imagem": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop",
+    "data": "15 Mai 2026",
+    "texto": "Divulgação: Estão abertas as inscrições para o Cadastro Municipal de Pessoas com Deficiência de Jahu. Com a sua participação, conseguimos mapear as necessidades do nosso município e direcionar melhor as políticas públicas. Acesse nosso site e faça seu pré-cadastro online! 🌐♿ #Inclusão #CadastroPCD #Jaú",
+    "likes": 63,
+    "comentarios": 9,
+    "link": "https://www.instagram.com/cmpcd_jau/"
+  }
+]
