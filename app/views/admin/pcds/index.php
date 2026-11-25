@@ -127,8 +127,11 @@
                         </button>
                       </form>
                     <?php endif; ?>
-                    <a href="<?= BASE_URL ?>/admin/pcds/edit?id=<?= $pcd['id'] ?>" class="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" title="<?= isAdminParcial() ? 'Visualizar' : 'Visualizar/Editar' ?>">
+                    <a href="<?= BASE_URL ?>/admin/pcds/edit?id=<?= (int)$pcd['id'] ?>" class="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" title="<?= isAdminParcial() ? 'Visualizar' : 'Visualizar/Editar' ?>" aria-label="Editar cadastro de <?= e($pcd['nome_completo']) ?>">
                       <i data-lucide="<?= isAdminParcial() ? 'eye' : 'edit' ?>" class="w-4 h-4"></i>
+                    </a>
+                    <a href="<?= BASE_URL ?>/admin/pcds/pdf?id=<?= (int)$pcd['id'] ?>" class="p-2 rounded-lg bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 transition-colors" title="Exportar cadastro para PDF" aria-label="Exportar cadastro de <?= e($pcd['nome_completo']) ?> para PDF" target="_blank" rel="noopener">
+                      <i data-lucide="file-down" class="w-4 h-4"></i>
                     </a>
                     <?php if (($pcd['status'] ?? 'deferido') === 'deferido' && !isAdminParcial()): ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/pcds/delete" class="inline m-0 p-0">

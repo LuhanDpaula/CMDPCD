@@ -151,7 +151,7 @@
                   'suplente' => 'Conselheiro(a) Suplente'
                 ];
                 $funcao = $funcoesMap[$membro['funcao']] ?? ucfirst($membro['funcao']);
-                $fotoUrl = $membro['foto'] ? BASE_URL . '/' . $membro['foto'] : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face';
+                $fotoUrl = !empty($membro['foto']) && strpos($membro['foto'], 'http') !== 0 ? BASE_URL . '/' . ltrim($membro['foto'], '/') : BASE_URL . '/images/placeholder.svg';
               ?>
               <div class="bg-background rounded-2xl p-6 border border-border text-center hover:border-primary/30 transition-all fade-in-up" style="box-shadow: var(--card-shadow)">
                 <img src="<?= e($fotoUrl) ?>" alt="Foto de <?= htmlspecialchars($membro['nome_completo']) ?>" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
@@ -165,17 +165,17 @@
           <?php else: ?>
             <!-- Fallback estático -->
             <div class="bg-background rounded-2xl p-6 border border-border text-center hover:border-primary/30 transition-all fade-in-up" style="box-shadow: var(--card-shadow)">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" alt="Foto de Maria Silva" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
+              <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Foto de Maria Silva" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
               <h4 class="font-bold text-foreground">Maria Silva</h4>
               <p class="text-sm text-primary font-semibold">Presidente</p>
             </div>
             <div class="bg-background rounded-2xl p-6 border border-border text-center hover:border-primary/30 transition-all fade-in-up" style="box-shadow: var(--card-shadow)">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Foto de João Santos" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
+              <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Foto de João Santos" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
               <h4 class="font-bold text-foreground">João Santos</h4>
               <p class="text-sm text-primary font-semibold">Vice-Presidente</p>
             </div>
             <div class="bg-background rounded-2xl p-6 border border-border text-center hover:border-primary/30 transition-all fade-in-up" style="box-shadow: var(--card-shadow)">
-              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face" alt="Foto de Ana Costa" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
+              <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Foto de Ana Costa" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20" loading="lazy">
               <h4 class="font-bold text-foreground">Ana Costa</h4>
               <p class="text-sm text-primary font-semibold">Secretária</p>
             </div>
@@ -197,7 +197,7 @@
           <?php if (!empty($presidentesHistoricos)): ?>
             <?php foreach ($presidentesHistoricos as $pres): ?>
               <?php
-                $fotoUrl = $pres['foto'] ? BASE_URL . '/' . $pres['foto'] : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face';
+                $fotoUrl = !empty($pres['foto']) && strpos($pres['foto'], 'http') !== 0 ? BASE_URL . '/' . ltrim($pres['foto'], '/') : BASE_URL . '/images/placeholder.svg';
                 $periodo = date('Y', strtotime($pres['data_inicio']));
                 if ($pres['data_fim']) {
                   $periodo .= ' - ' . date('Y', strtotime($pres['data_fim']));
@@ -229,7 +229,7 @@
             <!-- Fallback estático -->
             <div class="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all flex flex-col fade-in-up" style="box-shadow: var(--card-shadow)">
               <div class="w-full h-48 overflow-hidden bg-muted">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" alt="Foto de Marta Regina Souza" class="w-full h-48 object-cover" loading="lazy">
+                <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Foto de Marta Regina Souza" class="w-full h-48 object-cover" loading="lazy">
               </div>
               <div class="p-6 flex flex-col flex-1">
                 <h4 class="text-lg font-bold text-foreground mb-1 line-clamp-1">Marta Regina Souza</h4>
@@ -240,7 +240,7 @@
                           data-nome="Marta Regina Souza"
                           data-gestao="Gestão: 2022 - 2024"
                           data-biografia="Liderou a implantação do cadastro estatístico de PCDs de Jahu, ampliou as parcerias com entidades assistenciais e criou programas de capacitação e inserção no mercado de trabalho. Sob sua liderança, o conselho realizou diversas campanhas de conscientização e audiências públicas importantes."
-                          data-foto="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face">
+                          data-foto="<?= BASE_URL ?>/images/placeholder.svg">
                     Ler mais <i data-lucide="arrow-right" class="w-3 h-3"></i>
                   </button>
                 </div>
@@ -248,7 +248,7 @@
             </div>
             <div class="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all flex flex-col fade-in-up" style="box-shadow: var(--card-shadow)">
               <div class="w-full h-48 overflow-hidden bg-muted">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Foto de José Antônio Ferreira" class="w-full h-48 object-cover" loading="lazy">
+                <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Foto de José Antônio Ferreira" class="w-full h-48 object-cover" loading="lazy">
               </div>
               <div class="p-6 flex flex-col flex-1">
                 <h4 class="text-lg font-bold text-foreground mb-1 line-clamp-1">José Antônio Ferreira</h4>
@@ -259,7 +259,7 @@
                           data-nome="José Antônio Ferreira"
                           data-gestao="Gestão: 2018 - 2021"
                           data-biografia="Primeiro presidente do CMPCD Jahu. Responsável pela fundação do conselho e implantação das primeiras políticas de acessibilidade no município, pavimentando o caminho das diretrizes municipais. Sua gestão foi marcada pelo diálogo constante com a sociedade civil e a criação de canais de denúncia para falta de acessibilidade."
-                          data-foto="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face">
+                          data-foto="<?= BASE_URL ?>/images/placeholder.svg">
                     Ler mais <i data-lucide="arrow-right" class="w-3 h-3"></i>
                   </button>
                 </div>

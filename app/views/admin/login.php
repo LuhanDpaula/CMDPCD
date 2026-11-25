@@ -30,7 +30,7 @@
                 <label class="block text-sm font-medium mb-1">E-mail ou CPF</label>
                 <div class="relative">
                   <i data-lucide="user" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground"></i>
-                  <input type="text" name="login" required class="w-full pl-10 pr-4 py-2 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary" placeholder="admin@admin.com ou CPF">
+                  <input type="text" name="login" required class="w-full pl-10 pr-4 py-2 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary" placeholder="seu@email.com ou CPF">
                 </div>
               </div>
               <div>

@@ -501,6 +501,7 @@ class Mongo
     private static $dbName = null;
     private static $available = null;
     private static $setupChecked = false;
+    private static $embeddedStore = null;
 
     private static $typeMap = ['root' => 'array', 'document' => 'array', 'array' => 'array'];
 
@@ -511,8 +512,9 @@ class Mongo
     {
         $local = is_file(__DIR__ . '/db.local.php') ? (require __DIR__ . '/db.local.php') : [];
         return [
-            'uri' => $local['mongo_uri'] ?? (getenv('MONGO_URI') ?: 'mongodb://127.0.0.1:27017'),
-            'db'  => $local['mongo_db'] ?? (getenv('MONGO_DB') ?: 'cmpcd_jau'),
+            'driver' => strtolower((string)($local['mongo_driver'] ?? (getenv('MONGO_DRIVER') ?: 'auto'))),
+            'uri'    => trim((string)($local['mongo_uri'] ?? (getenv('MONGO_URI') ?: 'mongodb://127.0.0.1:27017'))),
+            'db'     => trim((string)($local['mongo_db'] ?? (getenv('MONGO_DB') ?: 'cmpcd_jau'))),
         ];
     }
 
@@ -525,7 +527,7 @@ class Mongo
     {
         if (self::$manager === null) {
             $cfg = self::config();
-            if (!preg_match('/^[A-Za-z0-9_]+$/', $cfg['db'])) {
+            if (!preg_match('/^[A-Za-z0-9_-]+$/', $cfg['db'])) {
                 throw new Exception('Nome de banco MongoDB inválido.');
             }
             self::$dbName = $cfg['db'];
@@ -551,12 +553,38 @@ class Mongo
         return self::$dbName;
     }
 
+    private static function initEmbeddedStore(array $cfg): bool
+    {
+        if (!preg_match('/^[A-Za-z0-9_-]+$/', $cfg['db'])) {
+            throw new Exception('Nome de banco documental inválido.');
+        }
+        require_once __DIR__ . '/MongoJsonStore.php';
+        self::$embeddedStore = new MongoJsonStore(__DIR__ . '/../storage/mongodb/' . $cfg['db']);
+        self::$available = true;
+        self::ensureSetup();
+        self::$embeddedStore->purgeExpired();
+        return true;
+    }
+
     /** O MongoDB está acessível? (resultado guardado durante a requisição) */
     public static function available(): bool
     {
         if (self::$available !== null) {
             return self::$available;
         }
+        $cfg = self::config();
+
+        // Em hospedagens sem servidor MongoDB, use mongo_driver => 'json_local' para evitar tentativas TCP a cada requisição
+        if ($cfg['driver'] === 'json_local' || $cfg['uri'] === '' || $cfg['uri'] === 'none') {
+            try {
+                return self::initEmbeddedStore($cfg);
+            } catch (Throwable $localError) {
+                error_log('[CMDPCD][DocumentStore] ' . $localError->getMessage());
+                self::$available = false;
+                return false;
+            }
+        }
+
         try {
             self::manager()->executeCommand('admin', new Command(['ping' => 1]));
             self::$available = true;
@@ -565,10 +593,23 @@ class Mongo
             }
             self::ensureSetup();
         } catch (Throwable $e) {
-            error_log('[CMDPCD][Mongo] indisponível: ' . $e->getMessage());
-            self::$available = false;
+            // Quando não houver MongoDB acessível, utiliza armazenamento documental JSON persistente
+            error_log('[CMDPCD][Mongo] MongoDB externo indisponível; ativando banco documental local: ' . $e->getMessage());
+            try {
+                self::initEmbeddedStore($cfg);
+            } catch (Throwable $localError) {
+                error_log('[CMDPCD][DocumentStore] ' . $localError->getMessage());
+                self::$available = false;
+            }
         }
         return self::$available;
+    }
+
+    /** Indica o backend documental ativo. */
+    public static function backend(): string
+    {
+        self::available();
+        return self::$embeddedStore !== null ? 'json_local' : (self::hasNativeExtension() ? 'mongodb_extension' : 'mongodb_wire');
     }
 
     // ------------------------------------------------------------
@@ -576,6 +617,7 @@ class Mongo
     // ------------------------------------------------------------
     public static function find(string $coll, array $filter = [], array $options = []): array
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->find($coll, $filter, $options);
         if (self::hasNativeExtension()) {
             $queryCls = 'MongoDB\Driver\Query';
             $cursor = self::manager()->executeQuery(self::db() . '.' . $coll, new $queryCls($filter, $options));
@@ -616,6 +658,7 @@ class Mongo
 
     public static function insertOne(string $coll, array $doc): string
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->insertOne($coll, $doc);
         if (self::hasNativeExtension()) {
             $bulkCls = 'MongoDB\Driver\BulkWrite';
             $wcCls = 'MongoDB\Driver\WriteConcern';
@@ -642,6 +685,7 @@ class Mongo
     public static function insertMany(string $coll, array $docs): int
     {
         if (!$docs) return 0;
+        if (self::$embeddedStore !== null) return self::$embeddedStore->insertMany($coll, $docs);
         if (self::hasNativeExtension()) {
             $bulkCls = 'MongoDB\Driver\BulkWrite';
             $bulk = new $bulkCls(['ordered' => false]);
@@ -668,6 +712,7 @@ class Mongo
 
     public static function updateOne(string $coll, array $filter, array $update, array $options = []): int
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->updateOne($coll, $filter, $update, $options);
         if (self::hasNativeExtension()) {
             $bulkCls = 'MongoDB\Driver\BulkWrite';
             $bulk = new $bulkCls();
@@ -693,6 +738,7 @@ class Mongo
 
     public static function deleteOne(string $coll, array $filter): int
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->delete($coll, $filter, false);
         if (self::hasNativeExtension()) {
             $bulkCls = 'MongoDB\Driver\BulkWrite';
             $bulk = new $bulkCls();
@@ -712,6 +758,7 @@ class Mongo
 
     public static function deleteMany(string $coll, array $filter): int
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->delete($coll, $filter, true);
         if (self::hasNativeExtension()) {
             $bulkCls = 'MongoDB\Driver\BulkWrite';
             $bulk = new $bulkCls();
@@ -740,6 +787,7 @@ class Mongo
 
     public static function aggregate(string $coll, array $pipeline): array
     {
+        if (self::$embeddedStore !== null) return self::$embeddedStore->aggregate($coll, $pipeline);
         $normPipeline = array_map(fn($stage) => (object)$stage, $pipeline);
         $cursor = self::manager()->executeCommand(self::db(), new Command([
             'aggregate' => $coll,
@@ -752,6 +800,10 @@ class Mongo
 
     public static function command(array $cmd): array
     {
+        if (self::$embeddedStore !== null) {
+            if (isset($cmd['createIndexes'])) return [['ok' => 1]];
+            throw new RuntimeException('Comando MongoDB não suportado pelo armazenamento JSON local.');
+        }
         $cursor = self::manager()->executeCommand(self::db(), new Command($cmd));
         $cursor->setTypeMap(self::$typeMap);
         return $cursor->toArray();
@@ -763,6 +815,11 @@ class Mongo
      */
     public static function nextSequence(string $name): int
     {
+        if (self::$embeddedStore !== null) {
+            self::updateOne('contadores', ['_id' => $name], ['$inc' => ['seq' => 1]], ['upsert' => true]);
+            $doc = self::findOne('contadores', ['_id' => $name]);
+            return (int)($doc['seq'] ?? 1);
+        }
         $res = self::command([
             'findAndModify' => 'contadores',
             'query' => (object)['_id' => $name],

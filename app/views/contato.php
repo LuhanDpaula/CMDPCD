@@ -159,18 +159,12 @@
         <!-- Mapa -->
         <div class="fade-in-up">
           <h2 class="text-2xl font-extrabold text-foreground mb-6">Localização</h2>
-          <div class="bg-card rounded-2xl border border-border overflow-hidden" style="box-shadow: var(--card-shadow)">
-            <iframe
-              title="Localização CMPCD Jahu"
-              src="https://maps.google.com/maps?q=Rua%20Aristides%20Lobo%20Sobrinho%2C%20174%2C%20Ja%C3%BA%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="350"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              class="rounded-2xl"
-            ></iframe>
+          <div class="bg-card rounded-2xl border border-border p-8 min-h-[350px] flex flex-col justify-center" style="box-shadow: var(--card-shadow)">
+            <div class="text-primary mb-5"><i data-lucide="map-pin" class="w-12 h-12"></i></div>
+            <h3 class="text-xl font-bold mb-3">CMDPCD Jahu</h3>
+            <p class="text-muted-foreground leading-relaxed">Rua Aristides Lobo Sobrinho, nº 174,<br>Chácara Braz Miraglia - Jaú/SP</p>
+            <p class="text-sm text-muted-foreground mt-5">Atendimento: segunda a sexta, das 8h às 17h</p>
+            <p class="font-semibold mt-2">(14) 3624-5077</p>
           </div>
         </div>
 

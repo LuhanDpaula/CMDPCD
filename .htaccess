@@ -1,5 +1,5 @@
 # ============================================================
-#  SEGURANÇA - raiz do projeto
+#  SEGURANÇA E ROTEAMENTO - raiz do projeto (produção e local)
 #  Somente a pasta /public deve ser acessível pela web.
 #  (O ideal em produção é apontar o DocumentRoot direto para /public.)
 # ============================================================
@@ -9,11 +9,17 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Força HTTPS em produção (ignora localhost/127.0.0.1 e respeita proxy/Cloudflare)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # Bloqueia acesso direto a pastas internas (código, banco, configurações, documentos dos PCDs)
     RewriteRule ^(app|config|database|routes|storage|\.vscode|\.git)(/|$) - [F,L]
 
-    # Bloqueia arquivos sensíveis em qualquer lugar (sql, logs, backups, markdown, env, json de config)
-    RewriteRule \.(sql|log|bak|old|swp|md|env|ini|sh|json|lock|dist)$ - [F,L,NC]
+    # Bloqueia arquivos sensíveis em qualquer lugar (sql, logs, backups, markdown, env, csv, json de config)
+    RewriteRule \.(sql|log|bak|old|swp|md|env|ini|sh|json|lock|dist|csv|yml|yaml)$ - [F,L,NC]
     RewriteRule (^|/)\. - [F,L]
 
     # Raiz -> public

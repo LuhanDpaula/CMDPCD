@@ -22,6 +22,9 @@ if (isAdminTotal() && Mongo::available()) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Administrativo - CMDPCD Jahu</title>
   <meta name="description" content="Área restrita de gerenciamento.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1d6fa5">
+  <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>/favicon.svg">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/utilitarios.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/a11y.css">
@@ -30,9 +33,9 @@ if (isAdminTotal() && Mongo::available()) {
     // Aplica tamanho de fonte/contraste salvos antes de desenhar a página (evita "piscar")
     try { var a = JSON.parse(localStorage.getItem('cmdpcd_a11y')) || {}; if (a.font && a.font !== 100) document.documentElement.style.fontSize = a.font + '%'; if (a.contraste) document.documentElement.classList.add('high-contrast'); } catch (e) {}
   </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="<?= BASE_URL ?>/js/lucide-local.js"></script>
   <!-- Chart.js para gráficos se necessário -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="<?= BASE_URL ?>/js/chart-local.js"></script>
 </head>
 <body class="bg-background text-foreground font-sans">
   <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>

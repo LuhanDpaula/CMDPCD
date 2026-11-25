@@ -27,6 +27,13 @@ function menuActive($path, $current) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMDPCD Jahu - Conselho Municipal dos Direitos da Pessoa com Deficiência</title>
   <meta name="description" content="Conselho Municipal dos Direitos da Pessoa com Deficiência de Jahu. Promovendo inclusão, acessibilidade e cidadania.">
+  <meta name="theme-color" content="#1d6fa5">
+  <meta property="og:site_name" content="CMDPCD Jahu">
+  <meta property="og:title" content="CMDPCD Jahu - Conselho Municipal dos Direitos da Pessoa com Deficiência">
+  <meta property="og:description" content="Conselho Municipal dos Direitos da Pessoa com Deficiência de Jahu. Promovendo inclusão, acessibilidade e cidadania.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>/favicon.svg">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/utilitarios.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/a11y.css">
@@ -39,7 +46,7 @@ function menuActive($path, $current) {
   </script>
   
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="<?= BASE_URL ?>/js/lucide-local.js"></script>
 </head>
 <body class="bg-background text-foreground font-sans">
   <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>

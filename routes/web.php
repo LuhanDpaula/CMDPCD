@@ -61,6 +61,7 @@ $routes = [
         '/admin/pcds' => 'PcdController@index',
         '/admin/pcds/create' => 'PcdController@create',
         '/admin/pcds/edit' => 'PcdController@edit',
+        '/admin/pcds/pdf' => 'PcdController@exportPdf',
         '/admin/pcds/documento' => 'PcdController@documento',
 
         // Chat "Posso ajudar?" (MongoDB)

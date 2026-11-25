@@ -20,8 +20,8 @@ $dataStr = !empty($dataRaw) ? date('d/m/Y', strtotime($dataRaw)) : date('d/m/Y')
 $dataISO = !empty($dataRaw) ? date('c', strtotime($dataRaw)) : date('c');
 
 $imagem = !empty($noticia['imagem_capa']) 
-    ? (strpos($noticia['imagem_capa'], 'http') === 0 ? $noticia['imagem_capa'] : BASE_URL . '/' . ltrim($noticia['imagem_capa'], '/'))
-    : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop';
+    ? (strpos($noticia['imagem_capa'], 'http') === 0 ? BASE_URL . '/images/placeholder.svg' : BASE_URL . '/' . ltrim($noticia['imagem_capa'], '/'))
+    : BASE_URL . '/images/placeholder.svg';
 
 // Estimativa de leitura
 $textoSemTags = strip_tags($noticia['conteudo'] ?? '');
@@ -29,7 +29,7 @@ $totalPalavras = str_word_count($textoSemTags);
 $tempoLeitura = max(1, (int)ceil($totalPalavras / 200));
 
 // URL atual para compartilhamento
-$httpScheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+$httpScheme = (defined('IS_HTTPS') && IS_HTTPS) || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 $currentUrl = $httpScheme . '://' . $host . BASE_URL . '/noticia?id=' . urlencode($noticia['id']);
 $encodedUrl = urlencode($currentUrl);
@@ -200,8 +200,8 @@ $encodedTitulo = urlencode($noticia['titulo'] ?? 'Notícia CMDPCD Jahu');
               $itemDataRaw = $item['data_publicacao'] ?? $item['criado_em'] ?? '';
               $itemDataStr = !empty($itemDataRaw) ? date('d/m/Y', strtotime($itemDataRaw)) : '';
               $itemImagem = !empty($item['imagem_capa'])
-                  ? (strpos($item['imagem_capa'], 'http') === 0 ? $item['imagem_capa'] : BASE_URL . '/' . ltrim($item['imagem_capa'], '/'))
-                  : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop';
+                  ? (strpos($item['imagem_capa'], 'http') === 0 ? BASE_URL . '/images/placeholder.svg' : BASE_URL . '/' . ltrim($item['imagem_capa'], '/'))
+                  : BASE_URL . '/images/placeholder.svg';
               $itemResumo = mb_strimwidth(strip_tags($item['conteudo']), 0, 100, '...');
             ?>
             <article class="bg-card rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col group shadow-sm">

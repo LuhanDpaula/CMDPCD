@@ -330,6 +330,77 @@ class PcdController {
     }
 
     /**
+     * Exporta um cadastro individual para PDF, sem dependências externas.
+     */
+    public function exportPdf() {
+        checkPermission(['admin_total', 'admin_parcial']);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id || $id < 1) {
+            http_response_code(400);
+            exit('Identificador de cadastro inválido.');
+        }
+
+        $pcd = $this->pcdModel->find($id);
+        if (!$pcd) {
+            http_response_code(404);
+            exit('Cadastro não encontrado.');
+        }
+
+        require_once __DIR__ . '/../helpers/PdfDocument.php';
+        $pdf = new PdfDocument('Cadastro PCD - ' . ($pcd['nome_completo'] ?? ''));
+        $pdf->addTitle('Ficha de Cadastro', 'Conselho Municipal dos Direitos da Pessoa com Deficiência de Jahu')
+            ->addSection('Identificação')
+            ->addField('Número do cadastro', $pcd['id'] ?? '')
+            ->addField('Nome completo', $pcd['nome_completo'] ?? '')
+            ->addField('Nome social', $pcd['nome_social'] ?? '')
+            ->addField('CPF', $pcd['cpf'] ?? '')
+            ->addField('RG', $pcd['rg'] ?? '')
+            ->addField('Data de nascimento', !empty($pcd['data_nascimento']) ? date('d/m/Y', strtotime($pcd['data_nascimento'])) : '')
+            ->addField('Sexo biológico', $pcd['sexo_biologico'] ?? '')
+            ->addField('Gênero', $pcd['genero'] ?? '')
+            ->addField('Estado civil', $pcd['estado_civil'] ?? '')
+            ->addField('Raça/cor', $pcd['raca_cor'] ?? '')
+            ->addField('Nacionalidade', $pcd['nacionalidade'] ?? '')
+            ->addSeparator()
+            ->addSection('Endereço e contato')
+            ->addField('Endereço', trim(($pcd['logradouro'] ?? '') . ', ' . ($pcd['numero'] ?? '') . ' ' . ($pcd['complemento'] ?? '')))
+            ->addField('Bairro', $pcd['bairro'] ?? '')
+            ->addField('Cidade/UF', trim(($pcd['cidade'] ?? '') . '/' . ($pcd['uf'] ?? '')))
+            ->addField('CEP', $pcd['cep'] ?? '')
+            ->addField('Telefone principal', $pcd['telefone_principal'] ?? '')
+            ->addField('Telefone secundário', $pcd['telefone_secundario'] ?? '')
+            ->addField('E-mail', $pcd['email'] ?? '')
+            ->addField('Contato de emergência', $pcd['contato_emergencia_nome'] ?? '')
+            ->addField('Telefone de emergência', $pcd['contato_emergencia_telefone'] ?? '')
+            ->addSeparator()
+            ->addSection('Informações socioeconômicas')
+            ->addField('Renda familiar', isset($pcd['renda_familiar']) ? 'R$ ' . number_format((float)$pcd['renda_familiar'], 2, ',', '.') : '')
+            ->addField('Número de dependentes', $pcd['numero_dependentes'] ?? '')
+            ->addField('Situação habitacional', $pcd['situacao_habitacional'] ?? '')
+            ->addField('Escolaridade', $pcd['escolaridade'] ?? '')
+            ->addField('Ocupação atual', $pcd['ocupacao_atual'] ?? '')
+            ->addField('Recebe BPC/LOAS', !empty($pcd['recebe_bpc_loas']) ? 'Sim' : 'Não')
+            ->addField('Benefício informado', $pcd['beneficio_bpc_loas'] ?? '')
+            ->addSeparator()
+            ->addSection('Informações sobre deficiência e saúde')
+            ->addField('Deficiências', $pcd['deficiencias'] ?? [])
+            ->addField('Grau da deficiência', $pcd['grau_deficiencia'] ?? '')
+            ->addField('CID', $pcd['cid'] ?? '')
+            ->addField('Data do diagnóstico', !empty($pcd['data_diagnostico']) ? date('d/m/Y', strtotime($pcd['data_diagnostico'])) : '')
+            ->addField('Tecnologia assistiva', $pcd['tecnologia_assistiva'] ?? '')
+            ->addField('Necessita acompanhante', !empty($pcd['necessita_acompanhante']) ? 'Sim' : 'Não')
+            ->addField('Medicação contínua', $pcd['medicacao_continua'] ?? '')
+            ->addSeparator()
+            ->addSection('Controle administrativo')
+            ->addField('Status', ($pcd['status'] ?? '') === 'deferido' ? 'Deferido' : 'Pendente')
+            ->addField('Data de cadastro', !empty($pcd['criado_em']) ? date('d/m/Y H:i', strtotime($pcd['criado_em'])) : '')
+            ->addField('Responsável legal', $pcd['responsavel']['nome_completo'] ?? 'Não informado')
+            ->addField('Documentos anexados', count($pcd['documentos'] ?? []));
+
+        $pdf->output('cadastro-' . (int)$pcd['id'] . '.pdf');
+    }
+
+    /**
      * Salva as edições do PCD (POST).
      */
     public function update() {

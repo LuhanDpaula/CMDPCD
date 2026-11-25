@@ -37,7 +37,7 @@
           </div>
           <div class="bg-card rounded-2xl p-6 border border-border hover:border-primary/30 transition-all fade-in-up" style="box-shadow: var(--card-shadow)">
             <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <i data-lucide="building-2" class="w-6 h-6 text-primary"></i>
+              <i data-lucide="shield-check" class="w-6 h-6 text-primary"></i>
             </div>
             <h3 class="font-bold text-foreground mb-2">Transparência</h3>
             <p class="text-sm text-muted-foreground leading-relaxed">O conselho presta contas de todas as ações e recursos, garantindo transparência e responsabilidade.</p>

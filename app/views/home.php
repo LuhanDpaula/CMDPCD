@@ -34,10 +34,10 @@
               <i data-lucide="clipboard-list" class="w-5 h-5" aria-hidden="true"></i> Registrar PCD
             </a>
             <a href="<?= BASE_URL ?>/noticias" class="inline-flex items-center gap-2 bg-primary-foreground/20 text-primary-foreground font-bold px-6 py-3 rounded-full hover:bg-primary-foreground/30 transition-all border border-primary-foreground/30">
-              <i data-lucide="file-text" class="w-5 h-5" aria-hidden="true"></i> Notícias
+              <i data-lucide="newspaper" class="w-5 h-5" aria-hidden="true"></i> Notícias
             </a>
             <a href="<?= BASE_URL ?>/transparencia" class="inline-flex items-center gap-2 bg-primary-foreground/20 text-primary-foreground font-bold px-6 py-3 rounded-full hover:bg-primary-foreground/30 transition-all border border-primary-foreground/30">
-              <i data-lucide="log-in" class="w-5 h-5" aria-hidden="true"></i> Transparência
+              <i data-lucide="file-check" class="w-5 h-5" aria-hidden="true"></i> Transparência
             </a>
           </div>
         </div>
@@ -179,7 +179,7 @@
                 ];
                 $categoria = $temaMap[$n['tema']] ?? ucfirst($n['tema']);
                 $resumo = mb_strimwidth(strip_tags($n['conteudo']), 0, 150, '...');
-                $imagem = $n['imagem_capa'] ? BASE_URL . '/' . $n['imagem_capa'] : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=400&fit=crop';
+                $imagem = !empty($n['imagem_capa']) && strpos($n['imagem_capa'], 'http') !== 0 ? BASE_URL . '/' . ltrim($n['imagem_capa'], '/') : BASE_URL . '/images/placeholder.svg';
                 $dataStr = date('d/m/Y', strtotime($n['data_publicacao'] ?? $n['criado_em']));
               ?>
               <article class="bg-background rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col fade-in-up group" style="box-shadow: var(--card-shadow)">
@@ -211,7 +211,7 @@
             <!-- Fallback estático se o banco de dados estiver vazio -->
             <article class="bg-background rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col fade-in-up group" style="box-shadow: var(--card-shadow)">
               <a href="<?= BASE_URL ?>/noticia?id=1" class="block overflow-hidden h-48 bg-muted relative" aria-label="Prefeitura anuncia novo programa de acessibilidade">
-                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&h=400&fit=crop" alt="Prefeitura anuncia novo programa de acessibilidade" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Prefeitura anuncia novo programa de acessibilidade" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               </a>
               <div class="p-6 flex flex-col flex-1">
                 <div class="flex items-center justify-between mb-3">
@@ -234,7 +234,7 @@
 
             <article class="bg-background rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col fade-in-up group" style="box-shadow: var(--card-shadow)">
               <a href="<?= BASE_URL ?>/noticia?id=2" class="block overflow-hidden h-48 bg-muted relative" aria-label="CMPCD Jahu lança campanha sobre o mercado de trabalho para PCD">
-                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=400&fit=crop" alt="CMPCD Jahu lança campanha sobre o mercado de trabalho para PCD" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="CMPCD Jahu lança campanha sobre o mercado de trabalho para PCD" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               </a>
               <div class="p-6 flex flex-col flex-1">
                 <div class="flex items-center justify-between mb-3">
@@ -257,7 +257,7 @@
 
             <article class="bg-background rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col fade-in-up group" style="box-shadow: var(--card-shadow)">
               <a href="<?= BASE_URL ?>/noticia?id=3" class="block overflow-hidden h-48 bg-muted relative" aria-label="Resolução define diretrizes para atendimento preferencial qualificado">
-                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=400&fit=crop" alt="Resolução define diretrizes para atendimento preferencial qualificado" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                <img src="<?= BASE_URL ?>/images/placeholder.svg" alt="Resolução define diretrizes para atendimento preferencial qualificado" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               </a>
               <div class="p-6 flex flex-col flex-1">
                 <div class="flex items-center justify-between mb-3">

@@ -7,8 +7,32 @@ Options -Indexes
     Header unset X-Powered-By
 </IfModule>
 
+# Compressão GZIP para respostas de texto/CSS/JS/SVG
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache de navegador para arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType text/javascript "access plus 7 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/x-icon "access plus 30 days"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # Força HTTPS em produção (ignora localhost/127.0.0.1 e respeita proxy/Cloudflare)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Bloqueia arquivos ocultos (.htaccess, .env, etc.)
     RewriteRule (^|/)\. - [F,L]

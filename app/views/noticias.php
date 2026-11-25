@@ -22,7 +22,7 @@ if (empty($listaNoticias)) {
             'titulo' => 'CMDPCD Jahu realiza audiência pública sobre acessibilidade urbana',
             'tema' => 'acessibilidade',
             'conteudo' => 'Evento reuniu representantes da sociedade civil e do poder público para discutir melhorias na infraestrutura urbana e calçadas acessíveis.',
-            'imagem_capa' => 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&h=400&fit=crop',
+            'imagem_capa' => BASE_URL . '/images/placeholder.svg',
             'data_publicacao' => '2026-03-15 14:00:00',
             'autor_nome' => 'Comunicação CMDPCD'
         ],
@@ -31,7 +31,7 @@ if (empty($listaNoticias)) {
             'titulo' => 'Parceria com APAE amplia atendimento a pessoas com deficiência intelectual',
             'tema' => 'inclusao',
             'conteudo' => 'Novo convênio firmado entre o conselho e a APAE visa expandir os serviços de reabilitação e inclusão social em Jahu.',
-            'imagem_capa' => 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&h=400&fit=crop',
+            'imagem_capa' => BASE_URL . '/images/placeholder.svg',
             'data_publicacao' => '2026-03-10 10:00:00',
             'autor_nome' => 'Comunicação CMDPCD'
         ],
@@ -40,7 +40,7 @@ if (empty($listaNoticias)) {
             'titulo' => 'Campanha de conscientização sobre direitos das pessoas com deficiência',
             'tema' => 'direitos',
             'conteudo' => 'Ação educativa visa informar a população sobre os direitos garantidos por lei e o respeito às vagas exclusivas de estacionamento.',
-            'imagem_capa' => 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=800&h=400&fit=crop',
+            'imagem_capa' => BASE_URL . '/images/placeholder.svg',
             'data_publicacao' => '2026-02-28 09:30:00',
             'autor_nome' => 'Comunicação CMDPCD'
         ]
@@ -118,8 +118,8 @@ if (empty($listaNoticias)) {
               $dataStr = !empty($dataRaw) ? date('d/m/Y', strtotime($dataRaw)) : '';
               $resumo = mb_strimwidth(strip_tags($n['conteudo']), 0, 140, '...');
               $imagem = !empty($n['imagem_capa'])
-                  ? (strpos($n['imagem_capa'], 'http') === 0 ? $n['imagem_capa'] : BASE_URL . '/' . ltrim($n['imagem_capa'], '/'))
-                  : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=400&fit=crop';
+                  ? (strpos($n['imagem_capa'], 'http') === 0 ? BASE_URL . '/images/placeholder.svg' : BASE_URL . '/' . ltrim($n['imagem_capa'], '/'))
+                  : BASE_URL . '/images/placeholder.svg';
               $noticiaUrl = BASE_URL . '/noticia?id=' . $n['id'];
             ?>
             <article class="noticia-card fade-in-up bg-card rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col group shadow-sm"

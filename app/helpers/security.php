@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/mb_compat.php';
 /**
  * ============================================================
  *  HELPERS DE SEGURANÇA - CMDPCD Jahu

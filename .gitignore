@@ -22,3 +22,7 @@ storage/logs/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Banco documental local do chatbot (dados criados em execução)
+storage/mongodb/*
+!storage/mongodb/.gitkeep

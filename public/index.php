@@ -3,6 +3,9 @@
 // CONFIGURAÇÕES DE SEGURANÇA GLOBAIS
 // ============================================================
 
+// Fuso horário oficial (Brasília) para datas, relatórios, protocolos e auditoria
+date_default_timezone_set('America/Sao_Paulo');
+
 // Nunca mostrar erros/stack traces para o visitante (vazariam caminhos, SQL, etc.)
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
@@ -14,7 +17,16 @@ header('X-Content-Type-Options: nosniff');          // impede o navegador de "ad
 header('X-Frame-Options: DENY');                    // impede o site de ser embutido em iframe (clickjacking)
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
-$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (($_SERVER['SERVER_PORT'] ?? '') == 443);
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'");
+
+// Detecta HTTPS diretamente ou atrás de proxy reverso / Cloudflare / hospedagem com SSL
+$isHttps = (!empty($_SERVER['HTTPS']) && strtolower((string)$_SERVER['HTTPS']) !== 'off')
+    || ((int)($_SERVER['SERVER_PORT'] ?? 0) === 443)
+    || (strtolower((string)($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https')
+    || (strtolower((string)($_SERVER['HTTP_X_FORWARDED_SSL'] ?? '')) === 'on')
+    || (!empty($_SERVER['HTTP_CF_VISITOR']) && strpos((string)$_SERVER['HTTP_CF_VISITOR'], '"https"') !== false);
+define('IS_HTTPS', $isHttps);
+
 if ($isHttps) {
     header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 }
