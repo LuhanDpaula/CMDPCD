@@ -276,7 +276,6 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 # Acesso administrativo
 - Gestão do conteúdo público
 - Banco de dados relacional (usando SQL) para guardar informações dos PCD cadastrados
-cadastrados
 - Dashboards com estatísticas e números detalhados usando os dados dos banco relacional
 - Gestão dos usuários e PCD cadastrados, disponibilizando edição e exclusão dos dados
 - Sessão de auditória que registra LOG de todas as ações realizadas no site, como tentativas de Login e Gestão de conteúdo (banco não relacional)
