@@ -137,7 +137,8 @@ O projeto utiliza tecnologias web amplamente consolidadas, como:
 - CSS3;
 - Bootstrap;
 - JavaScript;
-- MySQL.
+- MySQL;
+- MongoDB.
 
 Essas ferramentas possuem ampla documentação, baixo custo de implementação e facilidade de manutenção.
 
@@ -248,6 +249,8 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 - Bootstrap;
 - JavaScript;
 - MySQL;
+- MongoDB;
+- Figma;
 - Git/GitHub.
 
 ---
@@ -260,6 +263,29 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 ---
 
 
+## Funcionalidades do projeto atualmente
+# Acesso Público 
+- Cadastro de pessoas com deficiência 
+- Chatbot para resolução de dúvidas (usa banco não relacional)
+- divulgação de conteúdo público como:
+   Atas de reuniões;
+   Notícias sobre o Conselho;
+   Estrutura e membros do Conselho;
+   Iniciativas do conselho;
+   Meios de contato com o Conselho.
+# Acesso administrativo
+- Gestão do conteúdo público
+- Banco de dados relacional (usando SQL) para guardar informações dos PCD cadastrados
+cadastrados
+- Dashboards com estatísticas e números detalhados usando os dados dos banco relacional
+- Gestão dos usuários e PCD cadastrados, disponibilizando edição e exclusão dos dados
+- Sessão de auditória que registra LOG de todas as ações realizadas no site, como tentativas de Login e Gestão de conteúdo (banco não relacional)
+- Níveis de Usuário, como Admin parcial, Admin total e Editor
+- Exportação dos dados de uma pessoa cadastrada em formato PDF
+
+---
+
+
 # Equipe do Projeto
 
 - Lucas Antonio Ribeiro
@@ -267,7 +293,6 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 - Samuel Custódio dos Santos
 
 ---
-
 # Instituição
 
 Projeto Integrador desenvolvido na Fatec-Jahu – 2026**.
