@@ -263,8 +263,8 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
 ---
 
 
-## Funcionalidades do projeto atualmente
-# Acesso Público 
+# Funcionalidades do projeto atualmente
+## Acesso Público 
 - Cadastro de pessoas com deficiência 
 - Chatbot para resolução de dúvidas (usa banco não relacional)
 - divulgação de conteúdo público como:
@@ -273,7 +273,7 @@ Atualmente, o sistema encontra-se em desenvolvimento, com foco na estruturação
    Estrutura e membros do Conselho;
    Iniciativas do conselho;
    Meios de contato com o Conselho.
-# Acesso administrativo
+## Acesso administrativo
 - Gestão do conteúdo público
 - Banco de dados relacional (usando SQL) para guardar informações dos PCD cadastrados
 - Dashboards com estatísticas e números detalhados usando os dados dos banco relacional
